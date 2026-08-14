@@ -1,0 +1,28 @@
+<script>
+    function checkPassword() {
+        const password = document.getElementById("password").value;
+
+        if (password === "marker123") {
+            // Correct password → open main.html
+            window.location.href = "main.html";
+        } else {
+            // Wrong password → Rickroll
+            window.location.href =
+                "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
+            // Try to close the tab
+            setTimeout(function() {
+                window.close();
+            }, 1000);
+        }
+    }
+
+    document.getElementById("password").addEventListener(
+        "keydown",
+        function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        }
+    );
+</script>
