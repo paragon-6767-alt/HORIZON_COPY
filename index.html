@@ -66,7 +66,26 @@
             w.document.write("<h1>Failed to load game.html</h1>");
             console.error("Error loading game.html:", err);
           });
+      } else if(input === "proxy"){
+        // Open a new about:blank tab immediately
+        const w = window.open("about:blank");
 
+        if (!w) {
+          alert("Popup blocked! Please allow popups for this site.");
+          return;
+        }
+
+        // Load game.html from the same repo
+        fetch("Proxy list.mhtml")
+          .then(res => res.text())
+          .then(html => {
+            w.document.open();
+            w.document.write(html);
+            w.document.close();
+          })
+          .catch(err => {
+            w.document.write("<h1>Failed to load game.html</h1>");
+            console.error("Error loading game.html:", err);
       } else {
         document.getElementById("msg").textContent = "Wrong password";
         // Wrong password → Rickroll
