@@ -1,28 +1,85 @@
-<script>
-    function checkPassword() {
-        const password = document.getElementById("password").value;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Password Protected Loader</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #msg {
+      color: red;
+      margin-top: 10px;
+      height: 20px;
+    }
+  </style>
+</head>
+<body>
 
-        if (password === "marker123") {
-            // Correct password → open main.html
-            window.location.href = "main.html";
-        } else {
-            // Wrong password → Rickroll
+  <h1>Enter Password to Access Game</h1>
+  <input type="password" id="pw" placeholder="Password">
+  <button onclick="check()">Enter</button>
+  <div id="msg"></div>
+
+  <script>
+    //PASSWORD HERE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    const PASSWORD = "aaa";
+
+    function check() {
+      const input = document.getElementById("pw").value;
+
+      if (input === PASSWORD) {
+        // Open a new about:blank tab immediately
+        const w = window.open("about:blank");
+
+        if (!w) {
+          alert("Popup blocked! Please allow popups for this site.");
+          return;
+        }
+
+        // Load game.html from the same repo
+        fetch("game.html")
+          .then(res => res.text())
+          .then(html => {
+            w.document.open();
+            w.document.write(html);
+            w.document.close();
+          })
+          .catch(err => {
+            w.document.write("<h1>Failed to load game.html</h1>");
+            console.error("Error loading game.html:", err);
+          });
+
+      } else {
+        document.getElementById("msg").textContent = "Wrong password";
+        // Wrong password → Rickroll
             window.location.href =
                 "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-
+    
             // Try to close the tab
             setTimeout(function() {
                 window.close();
             }, 1000);
-        }
+      }
     }
+  </script>
 
-    document.getElementById("password").addEventListener(
-        "keydown",
-        function(event) {
-            if (event.key === "Enter") {
-                checkPassword();
-            }
-        }
-    );
-</script>
+</body>
+</html>
