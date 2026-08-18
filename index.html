@@ -69,14 +69,13 @@
       } else if(input === "proxy"){
         // Open a new about:blank tab immediately
         const w = window.open("about:blank");
-
         if (!w) {
           alert("Popup blocked! Please allow popups for this site.");
           return;
         }
 
         // Load game.html from the same repo
-        fetch("Proxy list.mhtml")
+        fetch("Proxy list.html")
           .then(res => res.text())
           .then(html => {
             w.document.open();
