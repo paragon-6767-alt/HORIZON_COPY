@@ -40,12 +40,18 @@
 
   <script>
     //PASSWORD HERE/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    const PASSWORD = "aaa";
+    const PASSWORDS = {
+      "aaa": "main.html",
+      "bbb": "maintwo.html",
+      "tennis": "tennismasters.html",
+      "prxy": "list.html"
+    };
 
     function check() {
       const input = document.getElementById("pw").value;
+      const targetPage = PASSWORDS[input];
 
-      if (input === PASSWORD) {
+      if (targetPage) {
         // Open a new about:blank tab immediately
         const w = window.open("about:blank");
 
@@ -54,8 +60,8 @@
           return;
         }
 
-        // Load game.html from the same repo
-        fetch("maintwo.html")
+        // Load the selected HTML file from the same repo
+        fetch(targetPage)
           .then(res => res.text())
           .then(html => {
             w.document.open();
@@ -63,8 +69,8 @@
             w.document.close();
           })
           .catch(err => {
-            w.document.write("<h1>Failed to load game.html</h1>");
-            console.error("Error loading game.html:", err);
+            w.document.write("<h1>Failed to load page</h1>");
+            console.error("Error loading page:", err);
           });
 
       } else {
