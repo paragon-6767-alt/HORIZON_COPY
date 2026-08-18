@@ -33,7 +33,7 @@
 </head>
 <body>
 
-  <h1>Enter Password to Access Game</h1>
+  <h1>Enter Password to Access Game:</h1>
   <input type="password" id="pw" placeholder="Password">
   <button onclick="check()">Enter</button>
   <div id="msg"></div>
@@ -55,7 +55,7 @@
         }
 
         // Load game.html from the same repo
-        fetch("maintwo.html")
+        fetch("main2.html")
           .then(res => res.text())
           .then(html => {
             w.document.open();
